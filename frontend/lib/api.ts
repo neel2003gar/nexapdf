@@ -1,9 +1,10 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const API_URL = 'https://nexapdf-backend.onrender.com/api' // CORRECT URL - working backend - v2
+// Production API URL - Now configured without .env.local override
+const API_URL = 'https://nexapdf-backend.onrender.com/api'
 
-// Debug: Log the API URL during build
+// Debug: Log the API URL 
 console.log('🔗 API_URL configured as:', API_URL)
 
 // Create axios instance
