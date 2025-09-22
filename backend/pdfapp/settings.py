@@ -17,9 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-your-secret-key-here')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)  # Default to False for security
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='nexapdf-backend.onrender.com', cast=lambda v: [s.strip() for s in v.split(',')])
 
 # Application definition
 INSTALLED_APPS = [
@@ -160,15 +160,18 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-# CORS Configuration
+# CORS Configuration for Production and Development
 CORS_ALLOWED_ORIGINS = [
+    "https://neel2003gar.github.io",  # GitHub Pages frontend (production)
+    "https://nexapdf-backend.onrender.com",  # Backend self-reference
+    # Development origins (comment out for production)
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3001",
+    # Mobile development access
     "http://192.168.5.22:3000",
     "http://192.168.5.22:8000",
-    "https://neel2003gar.github.io",  # GitHub Pages frontend
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -194,10 +197,11 @@ CORS_ALLOWED_METHODS = [
 ]
 
 # Session settings for cross-origin requests
-SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
-SESSION_COOKIE_HTTPONLY = False  # Allow JavaScript access for debugging
+SESSION_COOKIE_SAMESITE = 'None' if not DEBUG else 'Lax'  # None required for cross-origin in production
+SESSION_COOKIE_SECURE = not DEBUG  # True in production (HTTPS), False in development
+SESSION_COOKIE_HTTPONLY = False  # Allow JavaScript access for frontend
 SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 86400  # 24 hours
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 86400 * 7  # 7 days
 SESSION_COOKIE_DOMAIN = None  # Use default domain

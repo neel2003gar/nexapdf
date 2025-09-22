@@ -9,7 +9,7 @@ import { useGuestMode } from '@/components/guest-mode-provider'
 import { BarChart3, AlertTriangle, CheckCircle, User, Zap } from 'lucide-react'
 import Link from 'next/link'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://nexapdf-backend.onrender.com/api'
 
 interface UsageStatusCardProps {
   className?: string

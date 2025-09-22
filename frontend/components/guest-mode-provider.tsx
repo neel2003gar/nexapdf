@@ -96,7 +96,7 @@ export function GuestModeProvider({ children }: GuestModeProviderProps) {
         // Fetch updated count from backend
         const fetchGuestUsage = async () => {
           try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://nexapdf-backend.onrender.com/api'
             const response = await fetch(`${API_URL}/pdf/usage/`, {
               credentials: 'include',
               headers: {

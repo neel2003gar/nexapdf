@@ -8,7 +8,7 @@ import { UsageLimitModal } from '@/components/usage-limit-modal'
 import { AlertTriangle, CheckCircle, BarChart3 } from 'lucide-react'
 import Link from 'next/link'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://nexapdf-backend.onrender.com/api'
 
 interface UsageIndicatorProps {
   variant?: 'default' | 'compact' | 'minimal'

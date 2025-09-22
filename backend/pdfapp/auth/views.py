@@ -165,7 +165,10 @@ class PasswordResetView(generics.GenericAPIView):
         
         # In a real application, you would send an email here
         # For now, we'll just return a success message
-        reset_url = f"http://localhost:3000/auth/reset-password/{uid}/{token}/"
+        
+        # Use production frontend URL for password reset
+        frontend_url = "https://neel2003gar.github.io/nexapdf" if not settings.DEBUG else "http://localhost:3000"
+        reset_url = f"{frontend_url}/auth/reset-password/{uid}/{token}/"
         
         try:
             # This is a placeholder - in production, use a proper email service
