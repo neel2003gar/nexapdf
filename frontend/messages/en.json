@@ -1,0 +1,121 @@
+{
+  "common": {
+    "title": "NexaPDF - Free PDF Tools",
+    "description": "Free online PDF tools - merge, split, compress, convert, and more",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "upload": "Upload",
+    "download": "Download",
+    "processing": "Processing...",
+    "fileSize": "File size",
+    "fileName": "File name"
+  },
+  "navigation": {
+    "home": "Home",
+    "tools": "Tools",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "features": {
+    "merge": {
+      "title": "Merge PDF",
+      "description": "Combine multiple PDF files into one document"
+    },
+    "split": {
+      "title": "Split PDF", 
+      "description": "Extract pages or split PDF into multiple files"
+    },
+    "compress": {
+      "title": "Compress PDF",
+      "description": "Reduce PDF file size while maintaining quality"
+    },
+    "convert": {
+      "pdfToImg": {
+        "title": "PDF to Image",
+        "description": "Convert PDF pages to JPG or PNG images"
+      },
+      "imgToPdf": {
+        "title": "Image to PDF",
+        "description": "Convert images to PDF document"
+      },
+      "docxToPdf": {
+        "title": "DOCX to PDF",
+        "description": "Convert Word documents to PDF"
+      }
+    },
+    "extractText": {
+      "title": "Extract Text",
+      "description": "Extract text content from PDF files"
+    },
+    "watermark": {
+      "title": "Add Watermark",
+      "description": "Add text or image watermarks to PDF"
+    },
+    "rotate": {
+      "title": "Rotate Pages",
+      "description": "Rotate PDF pages to correct orientation"
+    },
+    "secure": {
+      "title": "Secure PDF",
+      "description": "Add password protection to PDF files"
+    }
+  },
+  "upload": {
+    "dragDrop": "Drag and drop files here",
+    "or": "or",
+    "selectFiles": "Select Files",
+    "supportedFormats": "Supported formats",
+    "maxFileSize": "Maximum file size: 50MB",
+    "filesSelected": "files selected"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "signup": {
+      "title": "Sign Up",
+      "firstName": "First Name",
+      "lastName": "Last Name", 
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "operationsRemaining": "Operations remaining today",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity",
+    "profile": {
+      "title": "Profile",
+      "personalInfo": "Personal Information",
+      "accountSettings": "Account Settings",
+      "changePassword": "Change Password"
+    }
+  },
+  "errors": {
+    "fileRequired": "File is required",
+    "invalidFileType": "Invalid file type",
+    "fileTooLarge": "File too large",
+    "dailyLimitExceeded": "Daily limit exceeded",
+    "processingFailed": "Processing failed",
+    "networkError": "Network error"
+  }
+}
