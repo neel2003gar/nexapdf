@@ -19,11 +19,12 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-your-secret-key-here'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)  # Default to False for security
 
-# ALLOWED_HOSTS configuration
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='nexapdf-backend.onrender.com,nexapdf.onrender.com', cast=lambda v: [s.strip() for s in v.split(',')])
-
-# Also allow Render's internal hosts
-ALLOWED_HOSTS.extend(['127.0.0.1', 'localhost', '0.0.0.0'])
+# ALLOWED_HOSTS configuration for Docker deployment
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS', 
+    default='localhost,127.0.0.1,0.0.0.0',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 # Application definition
 INSTALLED_APPS = [
@@ -44,8 +45,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # Temporarily disable CSRF for health checks - can be re-enabled later
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',  # Re-enabled for security
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -75,18 +75,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pdfapp.wsgi.application'
 
-# Database
-# Database configuration - PostgreSQL for production, SQLite for development
-if config('DATABASE_URL', default=None) and HAS_DJ_DATABASE_URL:
+# Database configuration - Docker-optimized
+DATABASE_URL = config('DATABASE_URL', default=None)
+
+if DATABASE_URL and HAS_DJ_DATABASE_URL:
+    # Production: Use PostgreSQL via DATABASE_URL
     DATABASES = {
-        'default': dj_database_url.parse(config('DATABASE_URL'))
+        'default': dj_database_url.parse(DATABASE_URL)
     }
 else:
+    # Development: Use SQLite (not recommended for Docker production)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
+    }
+
+# Database connection settings for Docker
+if DATABASE_URL:
+    DATABASES['default']['CONN_MAX_AGE'] = 600  # Connection pooling
+    DATABASES['default']['OPTIONS'] = {
+        'connect_timeout': 10,
     }
 
 # Password validation
@@ -165,19 +175,12 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-# CORS Configuration for Production and Development
-CORS_ALLOWED_ORIGINS = [
-    "https://neel2003gar.github.io",  # GitHub Pages frontend (production)
-    "https://nexapdf-backend.onrender.com",  # Backend self-reference
-    # Development origins (comment out for production)
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    # Mobile development access
-    "http://192.168.5.22:3000",
-    "http://192.168.5.22:8000",
-]
+# CORS Configuration - Environment-based for Docker
+CORS_ALLOWED_ORIGINS = config(
+    'CORS_ALLOWED_ORIGINS',
+    default='https://neel2003gar.github.io,http://localhost:3000,http://127.0.0.1:3000',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL', default=False, cast=bool)  # Can be enabled for debugging
@@ -240,22 +243,49 @@ SUPPORT_RESPONSE_TIME_HOURS = 48
 
 # Static and Media files already configured above
 
-# Production-specific settings
+# Production-specific settings for Docker deployment
 if not DEBUG:
     # WhiteNoise static files storage for production
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     
-    # CORS settings for production - inherit from main settings but ensure GitHub Pages
-    CORS_ALLOWED_ORIGINS = [
-        "https://neel2003gar.github.io",  # GitHub Pages frontend
-        "http://localhost:3000",  # Keep for local testing
-        "http://127.0.0.1:3000",
-    ]
-    
     # Security settings for production
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Logging configuration for Docker
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': config('LOG_LEVEL', default='INFO'),
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': config('DJANGO_LOG_LEVEL', default='INFO'),
+            'propagate': True,
+        },
+        'pdfapp': {
+            'handlers': ['console'],
+            'level': config('APP_LOG_LEVEL', default='DEBUG'),
+            'propagate': True,
+        },
+    },
+}

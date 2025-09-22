@@ -1,12 +1,13 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-// Production API URL for GitHub Pages deployment
-const API_URL = 'https://nexapdf-backend.onrender.com/api'
+// API URL configuration - Environment-based for Docker deployment
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://nexapdf-backend.onrender.com/api'
 
 // Debug: Log the API URL configuration
 console.log('🔗 API_URL configured as:', API_URL)
-console.log('🚀 Deployment: GitHub Pages → Render Backend')
+console.log('🌐 Environment:', process.env.NODE_ENV)
+console.log('🚀 Deployment: GitHub Pages → Docker Backend')
 
 // Create axios instance
 const api = axios.create({

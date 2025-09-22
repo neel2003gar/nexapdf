@@ -41,10 +41,12 @@ services:
       - DEBUG=True
       - SECRET_KEY=django-insecure-local-dev-key-not-for-production
       - DATABASE_URL=postgresql://nexapdf_user:nexapdf_pass@db:5432/nexapdf_dev
-      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,backend
       - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
       - CORS_ALLOW_ALL=True
       - DAILY_OPERATION_LIMIT=100
+      - LOG_LEVEL=DEBUG
+      - PORT=8000
     volumes:
       - ./backend:/app
       - backend_media:/app/media
