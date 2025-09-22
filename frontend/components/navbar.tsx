@@ -25,14 +25,14 @@ export function Navbar() {
           <Link href="/" className="mr-6 flex items-center space-x-3">
             <div className="flex items-center space-x-3">
               <img
-                src="/nexa-pdf/logo.svg"
+                src="/nexapdf/logo.svg"
                 alt="NexaPDF"
                 width={48}
                 height={48}
                 className="h-12 w-12"
                 onError={(e) => {
                   // Fallback to PNG if SVG fails
-                  e.currentTarget.src = '/nexa-pdf/logo.png'
+                  e.currentTarget.src = '/nexapdf/logo.png'
                   e.currentTarget.onerror = () => {
                     // Hide image and show icon if both fail
                     e.currentTarget.style.display = 'none'
@@ -54,14 +54,14 @@ export function Navbar() {
             <Link href="/" className="flex items-center space-x-3 md:hidden">
               <div className="flex items-center space-x-3">
                 <img
-                  src="/nexa-pdf/logo.svg"
+                  src="/nexapdf/logo.svg"
                   alt="NexaPDF"
                   width={32}
                   height={32}
                   className="h-8 w-8"
                   onError={(e) => {
                     // Fallback to PNG if SVG fails
-                    e.currentTarget.src = '/nexa-pdf/logo.png'
+                    e.currentTarget.src = '/nexapdf/logo.png'
                     e.currentTarget.onerror = () => {
                       // Hide image and show icon if both fail
                       e.currentTarget.style.display = 'none'

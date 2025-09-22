@@ -169,7 +169,7 @@ export default function HomePage() {
           <div className="container mx-auto px-4 text-center relative z-10">
             <div className="flex justify-center mb-6">
               <Image
-                src="/logo.svg"
+                src="/nexapdf/logo.svg"
                 alt="NexaPDF"
                 width={80}
                 height={80}

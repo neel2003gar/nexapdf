@@ -14,10 +14,10 @@ export const metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '16x16', type: 'image/x-icon' },
-      { url: '/logo.svg', type: 'image/svg+xml' },
+      { url: '/nexapdf/logo.svg', type: 'image/svg+xml' },
     ],
     apple: [
-      { url: '/logo.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/nexapdf/logo.svg', sizes: '180x180', type: 'image/svg+xml' },
     ],
   },
 }

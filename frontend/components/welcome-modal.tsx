@@ -46,7 +46,7 @@ export function WelcomeModal({ isOpen, onClose, onContinueAsGuest }: WelcomeModa
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-lg">
               <img
-                src="/nexa-pdf/logo.svg"
+                src="/nexapdf/logo.svg"
                 alt="NexaPDF"
                 width={40}
                 height={40}

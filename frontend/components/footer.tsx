@@ -15,7 +15,7 @@ export function Footer() {
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-2">
                 <img
-                  src="/nexa-pdf/logo.svg"
+                  src="/nexapdf/logo.svg"
                   alt="NexaPDF"
                   width={24}
                   height={24}

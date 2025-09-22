@@ -67,7 +67,7 @@ export default function LoginPage() {
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="p-2 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg">
               <Image
-                src="/logo.svg"
+                src="/nexapdf/logo.svg"
                 alt="NexaPDF"
                 width={32}
                 height={32}
