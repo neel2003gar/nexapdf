@@ -19,7 +19,11 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-your-secret-key-here'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)  # Default to False for security
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='nexapdf-backend.onrender.com', cast=lambda v: [s.strip() for s in v.split(',')])
+# ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='nexapdf-backend.onrender.com,nexapdf.onrender.com', cast=lambda v: [s.strip() for s in v.split(',')])
+
+# Also allow Render's internal hosts
+ALLOWED_HOSTS.extend(['127.0.0.1', 'localhost', '0.0.0.0'])
 
 # Application definition
 INSTALLED_APPS = [
