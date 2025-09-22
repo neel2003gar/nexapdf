@@ -25,8 +25,12 @@ def health_check(request):
         'message': 'Backend is running'
     })
 
+@csrf_exempt
+def simple_root(request):
+    return JsonResponse({'status': 'ok'})
+
 urlpatterns = [
-    path('', api_root, name='api-root'),
+    path('', simple_root, name='simple-root'),  # Simplest possible endpoint
     path('api/', api_root, name='api-root'),
     path('health/', health_check, name='health-check'),
     path('api/health/', health_check, name='api-health-check'),
